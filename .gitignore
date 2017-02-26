@@ -19,5 +19,6 @@ Thumbs.db
 config.php
 tcpdf/cache/*
 !tcpdf/cache/empty
+components
 vendor
 

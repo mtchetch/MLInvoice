@@ -2,7 +2,7 @@
 
 /*******************************************************************************
  MLInvoice: web-based invoicing application.
- Copyright (C) 2010-2016 Ere Maijala
+ Copyright (C) 2010-2017 Ere Maijala
 
  Portions based on:
  PkLasku : web-based invoicing software.
@@ -14,7 +14,7 @@
 
 /*******************************************************************************
  MLInvoice: web-pohjainen laskutusohjelma.
- Copyright (C) 2010-2016 Ere Maijala
+ Copyright (C) 2010-2017 Ere Maijala
 
  Perustuu osittain sovellukseen:
  PkLasku : web-pohjainen laskutusohjelmisto.
@@ -45,27 +45,28 @@ function htmlPageStart($strTitle = '', $arrExtraScripts = [])
         $xUACompatible = "  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";
     else
         $xUACompatible = '';
-    $theme = defined('_UI_THEME_LOCATION_') ? _UI_THEME_LOCATION_ : 'jquery/css/theme/jquery-ui.min.css';
+    $theme = defined('_UI_THEME_LOCATION_') ? _UI_THEME_LOCATION_ : 'themes/default/jquery-ui.min.css';
     $lang = isset($_SESSION['sesLANG']) ? $_SESSION['sesLANG'] : 'fi-FI';
     $datePickerOptions = $GLOBALS['locDatePickerOptions'];
 
     $scripts = [
-        'jquery/js/jquery-2.2.4.min.js',
+        'components/jquery/jquery.min.js',
+        'components/jquery-cookie/jquery.cookie.js',
+        'components/jquery-ui/jquery-ui.min.js',
+        'vendor/select2/select2/select2.min.js',
         'jquery/js/jquery.json-2.3.min.js',
-        'jquery/js/jquery.cookie.js',
-        'jquery/js/jquery-ui.min.js',
-        'datatables/jquery.dataTables.min.js',
+        'vendor/datatables/datatables/media/js/jquery.dataTables.min.js',
         'jquery/js/jquery.floatingmessage.js',
         'js/date.js',
         "js/date-$lang.js",
         'jquery/js/jquery.daterangepicker.js',
         'js/mlinvoice.js',
-        'js/functions.js',
-        'select2/select2.min.js'
+        'js/functions.js'
     ];
 
-    if (file_exists("select2/select2_locale_$lang.js")) {
-        $scripts[] = "select2/select2_locale_$lang.js";
+    $select2Locale = "vendor/select2/select2/select2_locale_$lang.js";
+    if (file_exists($select2Locale)) {
+        $scripts[] = $select2Locale;
     }
     if (getSetting('session_keepalive')) {
         $scripts[] = 'js/keepalive.js';
@@ -81,8 +82,8 @@ function htmlPageStart($strTitle = '', $arrExtraScripts = [])
     $css = [
         $theme,
         'jquery/css/ui.daterangepicker.css',
-        'datatables/buttons.dataTables.min.css',
-        'select2/select2.css',
+        'vendor/datatables/datatables/media/css/dataTables.jqueryui.css',
+        'vendor/select2/select2/select2.css',
         'css/style.css'
     ];
 
@@ -361,7 +362,7 @@ EOT;
             $strValue = htmlspecialchars($strValue);
             $onchange = $astrAdditionalAttributes ? ".on(\"change\", $astrAdditionalAttributes)" : '';
             $strFormElement = <<<EOT
-<input type="hidden" class="$strStyle" id="$strName" name="$strName" value="$strValue"/>
+<input type="hidden" class="select $strStyle" id="$strName" name="$strName" value="$strValue"/>
 <script type="text/javascript">
 $(document).ready(function() {
   $("#$strName").select2({

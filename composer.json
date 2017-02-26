@@ -9,6 +9,11 @@
     ],
     "license": "GPL-2.0",
     "require": {
+        "components/jquery": "^3.1.1",
+        "components/jquery-cookie": "^1.4.1.2",
+        "components/jqueryui": "^1.12.1",
+        "datatables/datatables": "^1.10.13",
+        "select2/select2": "^3.5.4",
         "swiftmailer/swiftmailer": "^5.4.6",
         "tecnickcom/tcpdf": "^6.2.12"
     },

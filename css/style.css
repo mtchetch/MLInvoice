@@ -347,17 +347,17 @@ input.percent {
 }
 
 select {
-  padding: 0px 0px 0px 0px;
+  padding: 2px 0px 2px 0px;
 }
 
 select.normal {
-  padding: 0px 0px 0px 0px;
+  padding: 2px 0px 2px 0px;
 }
 select.small {
   width: 100px;
 }
-select.medium, div.medium {
-  width: 160px;
+input.select.medium, select.medium, div.medium {
+  width: 166px;
 }
 
 textarea {
